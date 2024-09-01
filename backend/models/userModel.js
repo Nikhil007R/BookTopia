@@ -36,16 +36,20 @@ const userSchema = mongoose.Schema(
         ref: "books",
       },
     ],
-    cart: {
-      type: mongoose.Types.ObjectId,
-      ref: "books",
-    },
-    orders: {
-      type: mongoose.Types.ObjectId,
-      ref: "order",
-    },
+    cart: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "books",
+      },
+    ],
+    orders: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "order",
+      },
+    ],
   },
-  { timestamps: true }   // helps in sorting of books 
+  { timestamps: true } // helps in sorting of books
 );
 
 module.exports = mongoose.model("user", userSchema);
