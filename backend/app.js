@@ -6,8 +6,10 @@ require('dotenv').config();
 // db connection 
 const db = require("./db/db")
 
-// user routes
-const user = require("./routes/user")
+// user route
+const user = require("./routes/user");
+// book route
+const book = require("./routes/book");
 
 // port number 
 const PORT = process.env.PORT || 5000
@@ -22,6 +24,7 @@ app.get("/", (req, res)=>{
 
 // creating routes 
 app.use("/app/v1/", user);
+app.use("/app/v1", book);
 
 
 app.listen(PORT, ()=>{
