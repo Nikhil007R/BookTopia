@@ -12,6 +12,10 @@ const user = require("./routes/user");
 const book = require("./routes/book");
 // favourite route 
 const favourites = require("./routes/favourites")
+// cart route 
+const cart = require("./routes/cart")
+// order route
+const order = require("./routes/order")
 
 // port number 
 const PORT = process.env.PORT || 5000
@@ -28,6 +32,8 @@ app.get("/", (req, res)=>{
 app.use("/app/v1/", user);
 app.use("/app/v1", book);
 app.use("/app/v1", favourites);
+app.use("/app/v1", cart);
+app.use("/app/v1", order);
 
 
 app.listen(PORT, ()=>{
