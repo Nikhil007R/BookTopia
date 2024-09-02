@@ -10,6 +10,8 @@ const db = require("./db/db")
 const user = require("./routes/user");
 // book route
 const book = require("./routes/book");
+// favourite route 
+const favourites = require("./routes/favourites")
 
 // port number 
 const PORT = process.env.PORT || 5000
@@ -25,6 +27,7 @@ app.get("/", (req, res)=>{
 // creating routes 
 app.use("/app/v1/", user);
 app.use("/app/v1", book);
+app.use("/app/v1", favourites);
 
 
 app.listen(PORT, ()=>{
