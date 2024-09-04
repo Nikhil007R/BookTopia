@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 // initializing env file 
 require('dotenv').config();
@@ -20,6 +21,7 @@ const order = require("./routes/order")
 // port number 
 const PORT = process.env.PORT || 5000
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 // app.use(cookieParser());

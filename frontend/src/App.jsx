@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Cart from './pages/Cart'
 import Profile from './pages/Profile'
+import ViewBookDetails from './components/ViewBookDetails/ViewBookDetails'
 
 function App() {
 
@@ -20,8 +21,9 @@ function App() {
           <Route path = "/all-books" element={<AllBooks/>}></Route>
           <Route path = "/cart" element={<Cart/>}></Route>
           <Route path = "/profile" element={<Profile/>}></Route>
-          <Route path = "/LogIn" element={<Login/>}></Route>
-          <Route path = "/SignUp" element={<Signup/>}></Route>
+          <Route path = "/login" element={<Login/>}></Route>
+          <Route path = "/signup" element={<Signup/>}></Route>
+          <Route path = "/view-book-details/:id" element={<ViewBookDetails/>} ></Route>
         </Routes>
         <Footer/>
       </Router>
