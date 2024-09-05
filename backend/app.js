@@ -31,7 +31,7 @@ app.get("/", (req, res)=>{
 })
 
 // creating routes 
-app.use("/app/v1/", user);
+app.use("/app/v1", user);
 app.use("/app/v1", book);
 app.use("/app/v1", favourites);
 app.use("/app/v1", cart);

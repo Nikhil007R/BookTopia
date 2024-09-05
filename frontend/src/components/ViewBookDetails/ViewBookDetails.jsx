@@ -15,7 +15,7 @@ const ViewBookDetails = () => {
       try {
         // Ensure the protocol matches the backend server setup
         const response = await axios.get(
-          `http://localhost:3000/app/v1//get-book-by-id/${id}`
+          `http://localhost:3000/app/v1/get-book-by-id/${id}`
         ); // Use http if backend does not have SSL
         console.log(response);
         setData(response.data.data);
