@@ -3,10 +3,20 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import { GrLanguage } from "react-icons/gr";
+import { FaHeart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdEditSquare } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const ViewBookDetails = () => {
   const { id } = useParams();
   // console.log(id);
+
+  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn)
+  const role = useSelector((state)=>state.auth.role)
+
+  console.log(isLoggedIn, role)
 
   const [Data, setData] = useState();
 
@@ -30,10 +40,26 @@ const ViewBookDetails = () => {
     <>
         {!Data && (<div className="h-screen bg-zinc-800 flex justify-center  items-center text-xl"><Loader/></div>) }
       {Data && (
-        <div className="px-8 md:px-12 py-8 bg-zinc-900 flex gap-4 flex-col md:flex-row">
-          <div className="bg-zinc-800 rounded p-4 h-[70vh] lg:h-[88vh] w-full lg:w-3/6 flex items-center justify-center">
-            <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh]" />
+        <div className="px-8 md:px-12 py-8 bg-zinc-900 flex gap-8 flex-col md:flex-row ">
+          <div className="bg-zinc-800 rounded p-4 h-[70vh] lg:h-[88vh] w-full lg:w-3/6 flex items-center flex-col justify-around gap-8 md:flex-row">
+            <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh] rounded" />
+            {/* if it is user  */}
+            {isLoggedIn === true && role === "user" && <div className="h-[80%] flex md:flex-col gap-4">
+              <button className="bg-white rounded-full text-3xl p-2 text-red-500"><FaHeart /></button>
+              <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500"><FaShoppingCart /></button>
+            </div>} 
+
+            {/* if it is admin  */}
+            {isLoggedIn === true && role === "admin" && <div className="h-[80%] flex md:flex-col gap-4">
+              <button className="bg-white rounded-full text-3xl p-2 text-black"><MdEditSquare /></button>
+              <button className="bg-white rounded-full text-3xl p-2 mt-4 text-red-500"><MdOutlineDelete /></button>
+            </div>} 
           </div>
+            {/* <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh] rounded" />
+            <div className="flex md:flex-col">
+              <button className="bg-white rounded-full text-2xl p-2"><FaHeart /></button>
+              <button className="bg-white rounded-full text-2xl p-2 mt-4"><FaShoppingCart /></button>
+            </div> */}
           <div className="p-4 w-full lg:w-3/6 ">
             <h1 className="text-4xl text-zinc-300 font-semibold">
               {Data.title}
