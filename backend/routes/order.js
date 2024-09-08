@@ -22,7 +22,7 @@ router.post("/place-order", authenticateToken, async(req, res)=>{
             await userModel.findOneAndUpdate({_id: id}, {$push: {orders: newOrder._id}})
             
             // clearing cart in userCart 
-            await userModel.findOneAndUpdate({_id: id}, {$pull: {cart: newOrder._id}})
+            await userModel.findOneAndUpdate({_id: id}, {$pull: {cart: orderData._id}})
         }
     
         return res.status(200).json({status: "Success", message: "Order Placed Successfull"});
