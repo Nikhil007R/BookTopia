@@ -60,7 +60,7 @@ router.delete("/delete-book", authenticateToken, async(req, res)=>{
         
         const deletedBook = await bookModel.findOneAndDelete({_id: bookid});
         console.log(deletedBook);
-        return res.status(200).json({message: "SUccessfully deleted book"});
+        return res.status(200).json({message: "Successfully deleted book"});
     }
     catch(err){
         return res.status(500).json({message: "An error occured"});

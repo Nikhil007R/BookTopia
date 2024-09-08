@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../Loader/Loader";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const ViewBookDetails = () => {
   const { id } = useParams();
   // console.log(id);
+  const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
@@ -54,6 +55,13 @@ const ViewBookDetails = () => {
     alert(response.data.message);
   }
 
+  const deleteBook = async()=>{
+    const response = await axios.delete("http://localhost:3000/app/v1/delete-book", {headers})
+    alert(response.data.message);
+    navigate("/all-Books");
+    
+  }
+
   return (
     <>
       {!Data && (
@@ -86,11 +94,13 @@ const ViewBookDetails = () => {
 
             {/* if it is admin  */}
             {isLoggedIn === true && role === "admin" && (
-              <div className="h-[80%] flex md:flex-col gap-4">
-                <button className="bg-white rounded-full text-3xl p-2 text-black">
+              <div className="h-[80%] flex md:flex-col gap-4" >
+                <Link to={`/update-book/${id}`} className="bg-white rounded-full text-3xl p-2 text-black"
+                //  onClick={updateBook}
+                 >
                   <MdEditSquare />
-                </button>
-                <button className="bg-white rounded-full text-3xl p-2 mt-4 text-red-500">
+                </Link>
+                <button className="bg-white rounded-full text-3xl p-2 mt-4 text-red-500" onClick={deleteBook}>
                   <MdOutlineDelete />
                 </button>
               </div>

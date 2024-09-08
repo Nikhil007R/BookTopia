@@ -24,6 +24,16 @@ const Settings = () => {
     fetch();
   }, []);
 
+  const change = (e)=>{
+    const {name, value} = e.target;
+    setValue({ ...Value, [name]: value});
+  }
+
+  const submitAddress = async()=>{
+    const response = await axios.put(`http://localhost:3000/app/v1/update-address`, {Value}, {headers});
+    alert(response.data.message);
+  }
+
   return (
     <div>
       {!ProfileData && (
@@ -60,10 +70,11 @@ const Settings = () => {
               placeholder="Address"
               className="p-2 rounded bg-zinc-800 mt-2 font-semibold"
               value={Value.address}
+              onChange={change}
             />
           </div>
           <div className="mt-4 flex justify-end">
-            <button className="bg-yellow-500 text-zinc-900 font-semibold px-3 py-2 rounded hover:bg-yellow-400"> 
+            <button className="bg-yellow-500 text-zinc-900 font-semibold px-3 py-2 rounded hover:bg-yellow-400" onClick={submitAddress}> 
               Update
             </button>
           </div>

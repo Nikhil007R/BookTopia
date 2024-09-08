@@ -9,13 +9,23 @@ const Navbar = () => {
     { title: "All Books", link: "/all-Books" },
     { title: "Cart", link: "/cart" },
     { title: "Profile", link: "/profile" },
+    { title: "Admin Profile", link: "/profile" },
   ];
 
   // checking value of isLoggedIn from authSlice
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector((state) => state.auth.role)
+
+
   // console.log(isLoggedIn);
   if (isLoggedIn === false) {
-    links.splice(2, 2);
+    links.splice(2, 3);
+  }
+  if(isLoggedIn === true && role === "user"){
+    links.splice(4, 1);
+  }
+  if(isLoggedIn === true && role === "admin"){
+    links.splice(3, 1);
   }
 
   const [MobileNav, setMobileNav] = useState("hidden");
@@ -40,7 +50,7 @@ const Navbar = () => {
             {links.map((item, i) => (
               
               <div className="flex items-center">
-                {item.title === "Profile" ? <Link
+                {item.title === "Profile" || item.title === "Admin Profile" ? <Link
                 to={item.link}
                 className="px-2 py-1 border border-blue-500 rounded hover:bg-white hover:text-black transition-all duration-300 text-lg"
                 key={i}
