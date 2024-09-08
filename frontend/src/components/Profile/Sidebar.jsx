@@ -5,7 +5,7 @@ import { TbLogout } from "react-icons/tb";
 
 const Sidebar = ({data}) => {
   return (
-    <div className='bg-zinc-800 p-4 rounded flex flex-col justify-between items-center h-[90%]'>
+    <div className='bg-zinc-800 p-4 rounded flex flex-col justify-between items-center h-auto lg:h-[90%]'>
         <div className='flex flex-col justify-center items-center'>
             <img src={data.avatar} alt="avatar" className='h-[12vh] rounded-full'/>
             <p className='mt-3 text-xl text-zinc-100 font-semibold'>

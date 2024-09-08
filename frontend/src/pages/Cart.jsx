@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader/Loader";
 import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [Cart, setCart] = useState();
   const [Total, setTotal] = useState(0);
+
+  const navigate = useNavigate();
 
   const headers = {
     id: localStorage.getItem("id"),
@@ -44,14 +47,21 @@ const Cart = () => {
     }
   }, [Cart]);
 
-  // const PlaceOrder = async()=>{
-
-  // }
+  const PlaceOrder = async()=>{
+    try{
+      const response = await axios.post(`http://localhost:3000/app/v1/place-order`, {order: Cart}, {headers});
+      alert(response.data.message);
+      navigate("/profile/orderHistory")
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <div className="bg-zinc-900 px-12 h-screen py-8">
       {/* If there is nothing in the cart  */}
-      {!Cart && <Loader />}
+      {!Cart && <div className="w-full flex items-center justify-center h-[90%]"> <Loader /> </div> }
       {Cart && Cart.length === 0 && (
         <div className="h-[90%]">
           <div className="h-[100%] flex items-center justify-center flex-col">
@@ -117,7 +127,7 @@ const Cart = () => {
       )}
 
       {/* Cart Placing Order  */}
-      {/* {Cart && Cart.length > 0 && (
+      {Cart && Cart.length > 0 && (
         <div className="mt-4 w-full flex items-center justify-end">
           <div className="p-4 bg-zinc-800 rounded">
             <h1 className="text-3xl text-zinc-200 font-semibold">
@@ -129,14 +139,14 @@ const Cart = () => {
             <div className="w-[100%] mt-3">
               <button
                 className="bg-zinc-100 rounded px-4 py-2 flex justify-center w-full font-semibold hover:bg-zinc-500 transition-all duration-300 hover:text-white"
-                // onClick={PlaceOrder}
+                onClick={PlaceOrder}
               >
                 Place Your Order
               </button>
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };
