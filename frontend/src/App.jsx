@@ -36,6 +36,8 @@ function App() {
         <Routes>
           <Route exact path = "/" element={<Home/>}></Route>
           <Route path = "/all-books" element={<AllBooks/>}></Route>
+          <Route path = "all-books/view-book-details/:id" element={<ViewBookDetails/>} ></Route>
+
           <Route path = "/cart" element={<Cart/>}></Route>
           <Route path = "/profile" element={<Profile/>}>
             <Route index element={<Favourites/>}></Route>

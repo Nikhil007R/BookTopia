@@ -34,7 +34,7 @@ router.put("/remove-book-from-cart/:bookid", authenticateToken, async(req, res)=
         const {bookid} = req.params;
         
         const userData = await userModel.findOne({_id: id});
-        const isBookInCart = userData.favourites.includes(bookid);
+        const isBookInCart = userData.cart.includes(bookid);
 
         if(isBookInCart){
             await userModel.findOneAndUpdate({_id: id},{ $pull: {cart: bookid}}); 

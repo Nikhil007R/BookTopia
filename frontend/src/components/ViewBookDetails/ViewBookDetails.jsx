@@ -13,10 +13,10 @@ const ViewBookDetails = () => {
   const { id } = useParams();
   // console.log(id);
 
-  const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn)
-  const role = useSelector((state)=>state.auth.role)
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const role = useSelector((state) => state.auth.role);
 
-  console.log(isLoggedIn, role)
+  console.log(isLoggedIn, role);
 
   const [Data, setData] = useState();
 
@@ -36,26 +36,67 @@ const ViewBookDetails = () => {
     fetch();
   }, []);
 
+  // adding book to favourite 
+  const headers = {
+    id: localStorage.getItem("id"),
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+    bookid: id
+  }
+
+  const handleFavourite = async()=>{
+    const response = await axios.put("http://localhost:3000/app/v1/add-book-to-favourite", {}, {headers})
+    alert(response.data.message);
+  }
+
+  // add to cart functionality 
+  const handlecart = async()=>{
+    const response = await axios.put("http://localhost:3000/app/v1/add-book-to-cart", {}, {headers})
+    alert(response.data.message);
+  }
+
   return (
     <>
-        {!Data && (<div className="h-screen bg-zinc-800 flex justify-center  items-center text-xl"><Loader/></div>) }
+      {!Data && (
+        <div className="h-screen bg-zinc-800 flex justify-center  items-center text-xl">
+          <Loader />
+        </div>
+      )}
       {Data && (
         <div className="px-8 md:px-12 py-8 bg-zinc-900 flex gap-8 flex-col md:flex-row ">
           <div className="bg-zinc-800 rounded p-4 h-[70vh] lg:h-[88vh] w-full lg:w-3/6 flex items-center flex-col justify-around gap-8 md:flex-row">
-            <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh] rounded" />
+            <img
+              src={Data.url}
+              alt="image"
+              className="h-[50vh] lg:h-[70vh] rounded"
+            />
             {/* if it is user  */}
-            {isLoggedIn === true && role === "user" && <div className="h-[80%] flex md:flex-col gap-4">
-              <button className="bg-white rounded-full text-3xl p-2 text-red-500"><FaHeart /></button>
-              <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500"><FaShoppingCart /></button>
-            </div>} 
+            {isLoggedIn === true && role === "user" && (
+              <div className="h-[80%] flex md:flex-col gap-4">
+                <button
+                  className="bg-white rounded-full text-3xl p-2 text-red-500"
+                  onClick={handleFavourite}
+                >
+                  <FaHeart />
+                </button>
+                <button className="bg-white rounded-full text-3xl p-2 mt-4 text-blue-500" onClick={handlecart}>
+                  <FaShoppingCart />
+                </button>
+              </div>
+            )}
 
             {/* if it is admin  */}
-            {isLoggedIn === true && role === "admin" && <div className="h-[80%] flex md:flex-col gap-4">
-              <button className="bg-white rounded-full text-3xl p-2 text-black"><MdEditSquare /></button>
-              <button className="bg-white rounded-full text-3xl p-2 mt-4 text-red-500"><MdOutlineDelete /></button>
-            </div>} 
+            {isLoggedIn === true && role === "admin" && (
+              <div className="h-[80%] flex md:flex-col gap-4">
+                <button className="bg-white rounded-full text-3xl p-2 text-black">
+                  <MdEditSquare />
+                </button>
+                <button className="bg-white rounded-full text-3xl p-2 mt-4 text-red-500">
+                  <MdOutlineDelete />
+                </button>
+              </div>
+            )}
           </div>
-            {/* <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh] rounded" />
+          {/* <img src={Data.url} alt="image" className="h-[50vh] lg:h-[70vh] rounded" />
             <div className="flex md:flex-col">
               <button className="bg-white rounded-full text-2xl p-2"><FaHeart /></button>
               <button className="bg-white rounded-full text-2xl p-2 mt-4"><FaShoppingCart /></button>
@@ -67,7 +108,8 @@ const ViewBookDetails = () => {
             <p className="text-zinc-400 mt-1">by {Data.author}</p>
             <p className="text-zinc-500 mt-4 text-xl">{Data.desc}</p>
             <p className="text-zinc-400 mt-4 flex items-center">
-            <GrLanguage className="me-3"/>{Data.language}
+              <GrLanguage className="me-3" />
+              {Data.language}
             </p>
             <p className="text-zinc-100 mt-4 text-3xl font-semibold">
               Price: ₹{Data.price}
