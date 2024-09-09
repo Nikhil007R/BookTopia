@@ -30,7 +30,7 @@ const Settings = () => {
   }
 
   const submitAddress = async()=>{
-    const response = await axios.put(`http://localhost:3000/app/v1/update-address`, {Value}, {headers});
+    const response = await axios.put(`http://localhost:3000/app/v1/update-address`, {address: Value.address}, {headers});
     alert(response.data.message);
   }
 
