@@ -26,7 +26,7 @@ const Signup = () => {
       }
       else{
         
-        const response = await axios.post("http://localhost:3000/app/v1/sign-up", {username: Values.username,
+        const response = await axios.post("https://booktopia-j3jp.onrender.com/app/v1/sign-up", {username: Values.username,
           email: Values.email,
           password: Values.password,
           address: Values.address,});

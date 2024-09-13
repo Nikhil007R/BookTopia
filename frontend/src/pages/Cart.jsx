@@ -18,7 +18,7 @@ const Cart = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3000/app/v1/get-user-cart",
+        "https://booktopia-j3jp.onrender.com/app/v1/get-user-cart",
         { headers }
       );
       setCart(response.data.data);
@@ -29,7 +29,7 @@ const Cart = () => {
   const deleteItem = async (bookid) => {
     console.log(bookid);
     const response = await axios.put(
-      `http://localhost:3000/app/v1/remove-book-from-cart/${bookid}`,
+      `https://booktopia-j3jp.onrender.com/app/v1/remove-book-from-cart/${bookid}`,
       {},
       { headers }
     );
@@ -49,7 +49,7 @@ const Cart = () => {
 
   const PlaceOrder = async()=>{
     try{
-      const response = await axios.post(`http://localhost:3000/app/v1/place-order`, {order: Cart}, {headers});
+      const response = await axios.post(`https://booktopia-j3jp.onrender.com/app/v1/place-order`, {order: Cart}, {headers});
       alert(response.data.message);
       navigate("/profile/orderHistory")
     }

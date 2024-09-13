@@ -12,7 +12,7 @@ const BookCard = ({ items, favourite }) => {
 
   const handleRemoveBook = async () => {
 
-    const response = await axios.put("http://localhost:3000/app/v1/remove-book-from-favourite", {}, {headers});
+    const response = await axios.put("https://booktopia-j3jp.onrender.com/app/v1/remove-book-from-favourite", {}, {headers});
    alert(response.data.message)
     
   };

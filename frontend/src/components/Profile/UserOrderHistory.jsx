@@ -14,7 +14,7 @@ const UserOrderHistory = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3000/app/v1/get-order-history",
+        "https://booktopia-j3jp.onrender.com/app/v1/get-order-history",
         { headers }
       );
       setOrderHistory(response.data.data);

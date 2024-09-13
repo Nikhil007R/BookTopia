@@ -12,7 +12,7 @@ const AllBooks = () => {
       try {
         // Ensure the protocol matches the backend server setup
         const response = await axios.get(
-          "http://localhost:3000/app/v1/get-all-books"
+          "https://booktopia-j3jp.onrender.com/app/v1/get-all-books"
         ); // Use http if backend does not have SSL
         // console.log(response);
         setData(response.data.data);

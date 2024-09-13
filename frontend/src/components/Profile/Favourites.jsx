@@ -14,7 +14,7 @@ const Favourites = () => {
 
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3000/app/v1/get-favourite-books",
+        "https://booktopia-j3jp.onrender.com/app/v1/get-favourite-books",
         { headers }
       );
       setFavouriteBooks(response.data.data);

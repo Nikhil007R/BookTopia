@@ -19,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
 
     const fetch = async()=>{
-      const response = await axios.get("http://localhost:3000/app/v1/get-user-information", {headers})
+      const response = await axios.get("https://booktopia-j3jp.onrender.com/app/v1/get-user-information", {headers})
       setProfile(response.data)
     }
     fetch();

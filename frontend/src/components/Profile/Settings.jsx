@@ -15,7 +15,7 @@ const Settings = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3000/app/v1/get-user-information",
+        "https://booktopia-j3jp.onrender.com/app/v1/get-user-information",
         { headers }
       );
       setProfileData(response.data);
@@ -30,7 +30,7 @@ const Settings = () => {
   }
 
   const submitAddress = async()=>{
-    const response = await axios.put(`http://localhost:3000/app/v1/update-address`, {address: Value.address}, {headers});
+    const response = await axios.put(`https://booktopia-j3jp.onrender.com/app/v1/update-address`, {address: Value.address}, {headers});
     alert(response.data.message);
   }
 

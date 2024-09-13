@@ -22,7 +22,7 @@ const AllOrders = () => {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:3000/app/v1/get-all-orders",
+        "https://booktopia-j3jp.onrender.com/app/v1/get-all-orders",
         { headers }
       );
       setAllOrders(response.data.data);
@@ -38,7 +38,7 @@ const AllOrders = () => {
   const submitChanges = async (i) => {
     const id = AllOrders[i]._id;
     const response = await axios.put(
-      `http://localhost:3000/app/v1/update-status/${id}`,
+      `https://booktopia-j3jp.onrender.com/app/v1/update-status/${id}`,
       Values,
       { headers }
     );
