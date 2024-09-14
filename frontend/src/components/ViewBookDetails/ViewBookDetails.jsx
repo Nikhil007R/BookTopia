@@ -26,7 +26,7 @@ const ViewBookDetails = () => {
       try {
         // Ensure the protocol matches the backend server setup
         const response = await axios.get(
-          `http://localhost:3000/app/v1/get-book-by-id/${id}`
+          `https://booktopia-j3jp.onrender.com/app/v1/get-book-by-id/${id}`
         ); // Use http if backend does not have SSL
         console.log(response);
         setData(response.data.data);
@@ -45,18 +45,18 @@ const ViewBookDetails = () => {
   }
 
   const handleFavourite = async()=>{
-    const response = await axios.put("http://localhost:3000/app/v1/add-book-to-favourite", {}, {headers})
+    const response = await axios.put("https://booktopia-j3jp.onrender.com/app/v1/add-book-to-favourite", {}, {headers})
     alert(response.data.message);
   }
 
   // add to cart functionality 
   const handlecart = async()=>{
-    const response = await axios.put("http://localhost:3000/app/v1/add-book-to-cart", {}, {headers})
+    const response = await axios.put("https://booktopia-j3jp.onrender.com/app/v1/add-book-to-cart", {}, {headers})
     alert(response.data.message);
   }
 
   const deleteBook = async()=>{
-    const response = await axios.delete("http://localhost:3000/app/v1/delete-book", {headers})
+    const response = await axios.delete("https://booktopia-j3jp.onrender.com/app/v1/delete-book", {headers})
     alert(response.data.message);
     navigate("/all-Books");
     
